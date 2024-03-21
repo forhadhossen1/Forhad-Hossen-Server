@@ -33,7 +33,11 @@ async function run() {
         const testimonialsCollection = client.db("forhadDB").collection("testimonials");
 
 
-
+        // projectCollection section 
+        app.get('/project', async (req, res) => {
+            const result = await projectCollection.find().toArray();
+            res.send(result)
+        })
 
         // Send a ping to confirm a successful connection
 
