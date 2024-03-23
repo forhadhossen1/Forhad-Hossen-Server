@@ -1,5 +1,5 @@
 const express = require('express')
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const app = express();
 require('dotenv').config();
 const cors = require('cors');
@@ -47,7 +47,7 @@ async function run() {
 
         app.get('/project/:id', async (req, res) => {
             const id = req.params.id;
-            const query = { _id: (id) };
+            const query = { _id: new ObjectId(id) };
             const result = await projectCollection.findOne(query);
             res.send(result);
         })
@@ -55,7 +55,7 @@ async function run() {
         app.patch('/project/:id', async (req, res) => {
             const project = req.body;
             const id = req.params.id;
-            const filter = { _id: (id) }
+            const filter = { _id: new ObjectId(id) }
             const updateDoc = {
                 $set: {
                     ProjectName: project.ProjectName,
@@ -70,6 +70,12 @@ async function run() {
             res.send(result);
         })
 
+        app.delete('/project/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: new ObjectId(id) };
+            const result = await projectCollection.deleteOne(query);
+            res.send(result);
+        })
 
         // testimonialsCollection section 
 
