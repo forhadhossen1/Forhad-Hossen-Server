@@ -51,6 +51,12 @@ async function run() {
             res.send(result);
         })
 
+        app.post('/testimonials', async (req, res) => {
+            const testimonial = req.body;
+            const result = await testimonialsCollection.insertOne(testimonial);
+            res.send(result);
+        })
+
 
 
         // Send a ping to confirm a successful connection
