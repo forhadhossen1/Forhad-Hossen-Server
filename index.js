@@ -39,6 +39,11 @@ async function run() {
             res.send(result)
         })
 
+        app.post('/project', async (req, res) => {
+            const projects = req.body;
+            const result = await projectCollection.insertOne(projects);
+            res.send(result);
+        })
         // testimonialsCollection section 
 
         app.get('/testimonials', async (req, res) => {
