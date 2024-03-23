@@ -44,6 +44,26 @@ async function run() {
             const result = await projectCollection.insertOne(projects);
             res.send(result);
         })
+
+        app.patch('/project/:id', async (req, res) => {
+            const project = req.body:
+            const id = req.params.id;
+            const filter = { _id: (id) }
+            const updateDoc = {
+                $set: {
+                    ProjectName: project.ProjectName,
+                    GitHubLink: project.GitHubLink,
+                    LiveLink: project.LiveLink,
+                    ProjectDescription: project.ProjectDescription,
+                    Image: project.Image
+
+                }
+            }
+            const result = await projectCollection.updateOne(filter, updateDoc);
+            res.send(result);
+        })
+
+
         // testimonialsCollection section 
 
         app.get('/testimonials', async (req, res) => {
