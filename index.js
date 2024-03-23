@@ -45,8 +45,15 @@ async function run() {
             res.send(result);
         })
 
+        app.get('/project/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: (id) };
+            const result = await projectCollection.findOne(query);
+            res.send(result);
+        })
+
         app.patch('/project/:id', async (req, res) => {
-            const project = req.body:
+            const project = req.body;
             const id = req.params.id;
             const filter = { _id: (id) }
             const updateDoc = {
