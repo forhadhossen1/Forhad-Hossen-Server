@@ -12,7 +12,6 @@ app.use(express.json());
 
 
 
-
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.onmt34s.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -32,6 +31,16 @@ async function run() {
         const projectCollection = client.db("forhadDB").collection("project");
         const testimonialsCollection = client.db("forhadDB").collection("testimonials");
 
+        // admin middleware 
+        // const authenticateAdmin = (req, res, nex) => {
+        //     const { email, password } = req.headers;
+        //     if (email === adminEmail && password === adminPassword) {
+        //         next();
+        //     } else {
+        //         res.status(401).send('Unauthorized');
+        //     };
+
+        // }
 
         // projectCollection section 
         app.get('/project', async (req, res) => {
